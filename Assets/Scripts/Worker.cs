@@ -43,8 +43,7 @@ public class Worker : MonoBehaviour {
         if (pathLeftToGo.Count > 0)  {
             Vector3 dir =  (Vector3)pathLeftToGo[0]-transform.position ;
             transform.position += dir.normalized * speed * Time.deltaTime;
-            if (((Vector2)transform.position - pathLeftToGo[0]).sqrMagnitude < Time.deltaTime * Time.deltaTime * speed * speed) 
-            {
+            if (((Vector2)transform.position - pathLeftToGo[0]).sqrMagnitude < Time.deltaTime * Time.deltaTime * speed * speed) {
                 transform.position = pathLeftToGo[0];
                 pathLeftToGo.RemoveAt(0);
             }
@@ -74,8 +73,7 @@ public class Worker : MonoBehaviour {
 
     Dictionary<Vector2,float> GetNeighbourNodes(Vector2 pos) {
         Dictionary<Vector2, float> neighbours = new Dictionary<Vector2, float>();
-        for (int i=-1;i<2;i++)
-        {
+        for (int i=-1;i<2;i++) {
             for (int j=-1;j<2;j++) {
                 if (i == 0 && j == 0) continue;
 
@@ -107,5 +105,4 @@ public class Worker : MonoBehaviour {
         newPath.Add(path[path.Count - 1]);
         return newPath;
     }
-
 }
