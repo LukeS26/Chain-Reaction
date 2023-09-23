@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     // GameObject Variables
-    public GameObject startMenu, /* inGameUI, */ pauseMenu;
+    public GameObject startMenu, inGameUI, pauseMenu;
 
     // Sprite Variables
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         
         // Sets the Start Menu active, and every other Menu inactive
         startMenu.SetActive(true);
-        /* inGameUI.SetActive(false); */
+        inGameUI.SetActive(false);
         pauseMenu.SetActive(false);
     }
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         startMenu.SetActive(false);
-        /* inGameUI.SetActive(true); */
+        inGameUI.SetActive(true);
         gameStarted = true;
     }
 
@@ -63,14 +63,14 @@ public class GameManager : MonoBehaviour
     // Called when the Pause Menu is opened
     public void OpenPause()
     {
-        startMenu.SetActive(false);
+        inGameUI.SetActive(false);
         pauseMenu.SetActive(true);
     }
 
     // Called when the Pause Menu is closed
     public void ClosePause()
     {
-        startMenu.SetActive(true);
+        inGameUI.SetActive(true);
         pauseMenu.SetActive(false);
     }
 }
