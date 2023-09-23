@@ -233,6 +233,7 @@ MonoBehaviour:
   startMenu: {fileID: 71257817}
   inGameUI: {fileID: 1118103619}
   pauseMenu: {fileID: 902520560}
+  dayNightWheel: {fileID: 1965001484}
 --- !u!4 &76320731
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     // GameObject Variables
     public GameObject startMenu, inGameUI, pauseMenu;
+    public GameObject dayNightWheel;
 
     // Sprite Variables
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public static bool gameStarted;
 
     // Float Variables
+    public static float timeCycle;
 
     // Integer Variables
 
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameStarted = false;
+        timeCycle = 0.0f;
         
         // Sets the Start Menu active, and every other Menu inactive
         startMenu.SetActive(true);
@@ -44,7 +47,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-        
+        // Only updates if the game has started
+        if(gameStarted)
+        {
+            // Resets the timeCycle when a day has passed
+            if(timeCycle > 1.0f) { timeCycle = 0.0f; }
+
+            // Spins the dayNightWheel
+            dayNightWheel.transform.Rotate(0.0f, 0.0f, (timeCycle * 360), Space.World);
+        }
     }
 
     // Starts End Game Sequence
