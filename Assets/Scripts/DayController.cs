@@ -12,12 +12,11 @@ public class DayController : MonoBehaviour
     public AnimationCurve lightCurve;
 
     WorkerController workers;
+    StatManager stats;
 
     UnityEngine.Rendering.Universal.Light2D light;
     
-    int daysInQuarter = 10;
     int daysPassed = 0;
-    int curQuarter = 1;
 
     // Update is called once per frame
     void Update() {
@@ -29,6 +28,12 @@ public class DayController : MonoBehaviour
             light = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         }
 
+        if(!stats) {
+            stats = FindObjectOfType<StatManager>();
+        }
+
+        if(!GameManager.gameStarted) { return; }
+
         if(hourPercent < 17 && hourPercent > 5) {
             hourPercent += Time.deltaTime * daySpeed; 
         } else {
@@ -38,20 +43,16 @@ public class DayController : MonoBehaviour
         if(hourPercent >= 24) {
             daysPassed++;
             hourPercent %= 24;
+
+            for(int i = 0; i < workers.workers.Count; i++) {
+                stats.PayMoney(workers.wage / 30f);
+            }
+            stats.UpdateBoard();
         }
 
         GameManager.timeCycle = GetDayPercent();
 
-        if(daysPassed >= daysInQuarter) {
-            daysPassed = 0;
-            curQuarter++;
-        }
-
         light.intensity = lightCurve.Evaluate(hourPercent / 24);
-    }
-
-    public float GetQuarter() {
-        return curQuarter;
     }
 
     public float GetHour() {
@@ -60,5 +61,9 @@ public class DayController : MonoBehaviour
 
     public float GetDayPercent() {
         return hourPercent / 24;
+    }
+
+    public int GetCurDay() {
+        return daysPassed;
     }
 }

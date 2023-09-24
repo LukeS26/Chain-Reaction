@@ -7,7 +7,7 @@ public class WorkerController : MonoBehaviour
     public List<Worker> workers = new List<Worker>();
 
     float timeWorking;
-    float wage;
+    public float wage;
     float startWorkTime = 5; //Sunrise = 6
     float endWorkTime = 17; //Sunset = 18
 
@@ -30,10 +30,10 @@ public class WorkerController : MonoBehaviour
 
         isWorkingDay = dayCycle.GetHour() > startWorkTime && dayCycle.GetHour() < endWorkTime;
 
-        if(!isWorkingDay && GetAvgHappiness() < 0.3f && Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.2f / 12f) {
+        if(!isWorkingDay && GetAvgHappiness() < 0.3f && Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.4f / 12f) {
             //Unionize
             stats.UnionEvent();
-            minimumWage = 450;
+            minimumWage = 575;
         }
 
         if(wage < minimumWage) {
@@ -45,9 +45,6 @@ public class WorkerController : MonoBehaviour
             UpdateWorkers(true);
         } else if(!isWorkingDay && wasWorkingDay) {
             UpdateWorkers(false);
-            for(int i = 0; i < workers.Count; i++) {
-                stats.PayMoney(wage / 30f);
-            }
         }
 
         wasWorkingDay = isWorkingDay;

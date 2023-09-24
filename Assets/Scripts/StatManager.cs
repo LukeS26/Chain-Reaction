@@ -10,10 +10,12 @@ public class StatManager : MonoBehaviour
     float enviroHate = 0;
     public float boardPopularity = 1;
 
+    float totalDayMoney = 100;
+
     WorkerController workers;
     DayController days;
 
-    float enviroHateDecayRate = 0.01f;
+    float enviroHateDecayRate = 0.001f;
     // Update is called once per frame
     void Update() {
         if(!workers) {
@@ -35,30 +37,40 @@ public class StatManager : MonoBehaviour
         }
 
         popularity -= enviroHate * 0.1f * Time.deltaTime;
-        popularity += (workers.GetAvgHappiness() - 0.5f) * Time.deltaTime * 0.1f;
+        popularity += Mathf.Clamp(workers.GetAvgHappiness() - 0.5f, -0.5f, 0.25f) * Time.deltaTime * 0.1f;
+        popularity -= Mathf.Clamp(forestsDestroyed * 0.0001f, 0, 1);
 
-        boardPopularity += 0;
+        popularity = Mathf.Min(popularity, 1);
+        popularity = Mathf.Max(0, popularity);
+
+        GameManager.money = totalMoney;
+        GameManager.avgWorkHap = (int) (workers.GetAvgHappiness() * 100);
+        GameManager.ceoHap = (int) (boardPopularity * 100);
+        GameManager.custHap = (int) (popularity * 100);
     }
 
+    public void UpdateBoard() {
+        boardPopularity += 0.1f * (totalDayMoney - ExpectedProfit()) / (totalDayMoney + ExpectedProfit());
+        totalDayMoney = 0;
+    }
+    
     float ExpectedProfit() {
-        return 0;
+        return 150 * Mathf.Pow(2, 0.3f * days.GetCurDay());
     }
 
     public void DestoryTree() {
-        enviroHate += 0.15f;
-        popularity -= 0.1f;
+        enviroHate += 0.02f;
+        popularity -= 0.02f;
         forestsDestroyed++;
     }
 
     public void BuyGreenwash() {
         enviroHate -= 0.3f;
-        popularity += 0.2f;
-        //Queue broadcast
+        popularity += 0.15f;
     }
 
     public void BuyHappiness() {
         workers.BuyHappiness(0.2f);
-        //Queue broadcast
     }
 
     public void UnionEvent() {
@@ -68,9 +80,11 @@ public class StatManager : MonoBehaviour
 
     public void AddMoney(float amount) {
         totalMoney += amount;
+        totalDayMoney += amount;
     }
 
     public void PayMoney(float amount) {
         totalMoney -= amount;
+        totalDayMoney -= amount;
     }
 }

@@ -101,16 +101,10 @@ public class GameManager : MonoBehaviour
     // Updates the happiness level for several components, and how much money the player has
     void UpdateHappinessLevels()
     {
-        // Updates values contained within variables
-        money = 0.0f;
-        avgWorkHap = 0.0f;
-        ceoHap = 0.0f;
-        custHap = 0.0f;
-
         // Updates text in UI
         moneyText.text = "Money: $" + money;
         avgWorkHapText.text = "Average Worker Happiness: " + avgWorkHap;
-        ceoHapText.text = "CEO Happiness: " + ceoHap;
+        ceoHapText.text = "Shareholder Happiness: " + ceoHap;
         custHapText.text = "Customer Happiness: " + custHap;
     }
 }

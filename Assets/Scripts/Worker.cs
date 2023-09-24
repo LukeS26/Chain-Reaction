@@ -61,7 +61,7 @@ public class Worker : MonoBehaviour {
             happiness = Mathf.Min(happiness, 1.0f);
 
             if(happiness < 0.1f) {
-                if(Random.Range(0f, 1f) < Time.deltaTime * 0.2f * 0.2f / 12f) {
+                if(Random.Range(0f, 1f) < Time.deltaTime * 0.8f * 0.2f / 12f) {
                     workers.RemoveWorker(this);
                     workers.DropHappiness(0.2f, residenceStation);
 

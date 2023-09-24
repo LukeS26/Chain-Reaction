@@ -10,7 +10,6 @@ public class ShopItem : MonoBehaviour, IDragHandler
     public GameObject prefab;
 
     CameraController controller;
-    WorkerController workers;
 
     bool dragging;
 
@@ -29,10 +28,6 @@ public class ShopItem : MonoBehaviour, IDragHandler
             controller = FindObjectOfType<CameraController>();
         }
 
-        if(!workers) {
-            workers = FindObjectOfType<WorkerController>();
-        }
-
         if(dragging) {
             return;
         }
@@ -42,10 +37,6 @@ public class ShopItem : MonoBehaviour, IDragHandler
         if(prefab) {
             if(prefab.GetComponent<Placeable>()) {
                 controller.SetPickedObject(Instantiate(prefab).GetComponent<Placeable>());
-            } else if(prefab.GetComponent<Worker>()) {
-                Worker worker = Instantiate(prefab, new Vector3(controller.transform.position.x, controller.transform.position.y, 0), Quaternion.identity).GetComponent<Worker>();
-
-                workers.PutInResidence(worker);
             }
         }
     }
