@@ -48,13 +48,13 @@ public class Worker : MonoBehaviour {
         }
         
         if(isWorking) {
-            float wageFactor = 550.0f / wage;
+            float wageFactor = 18.0f / wage;
 
             happiness -= (WorkingStationIsSlaughter ? 1.5f : 1f) * happinessDecreaseRate * wageFactor * Time.deltaTime / 100f;
             
             happiness = Mathf.Max(happiness, 0.0f);
         } else {
-            float wageFactor = wage / 550.0f;
+            float wageFactor = wage / 18.0f;
             
             happiness += happinessDecreaseRate * wageFactor * Time.deltaTime * 0.5f / 100f;
             

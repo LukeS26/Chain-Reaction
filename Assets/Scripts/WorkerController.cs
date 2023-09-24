@@ -9,7 +9,7 @@ public class WorkerController : MonoBehaviour
     public List<Worker> workers = new List<Worker>();
 
     float timeWorking;
-    public int wage = 0;
+    public int wage = 18;
     
     public TMP_InputField wageIn;
     float startWorkTime = 5; //Sunrise = 6
@@ -20,7 +20,9 @@ public class WorkerController : MonoBehaviour
     DayController dayCycle;
     StatManager stats;
 
-    int minimumWage = 300;
+    bool hasUnionized = false;
+
+    int minimumWage = 13;
 
     // Update is called once per frame
     void Update() {
@@ -34,10 +36,11 @@ public class WorkerController : MonoBehaviour
 
         isWorkingDay = dayCycle.GetHour() > startWorkTime && dayCycle.GetHour() < endWorkTime;
 
-        if(!isWorkingDay && GetAvgHappiness() < 0.3f && UnityEngine.Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.4f / 12f) {
+        if(!hasUnionized && !isWorkingDay && GetAvgHappiness() < 0.3f && UnityEngine.Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.4f / 12f) {
             //Unionize
+            hasUnionized = true;
             stats.UnionEvent();
-            minimumWage = 575;
+            minimumWage = 21;
         }
         
         if(wage < minimumWage) {

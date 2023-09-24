@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour {
 
     public float moveSpeed;
     public float zoomSpeed = 0.05f;
+    float boughtItem;
 
     GameObject clickingOn;
 
@@ -53,6 +54,7 @@ public class CameraController : MonoBehaviour {
             if(curClickTime >= pickUpThreshold && clickingOn != null) {
                 if(hit && pickedObj == null && hit.transform.GetComponent<Placeable>()) {
                     pickedObj = hit.transform.GetComponent<Placeable>();
+                    pickedObj.gameObject.layer = 6;
                     pickedPos = pickedObj.transform.position;
                 }
                 if(hit && pickedObj == null && hit.transform.GetComponent<Rainforest>()) {
@@ -77,10 +79,17 @@ public class CameraController : MonoBehaviour {
         } else {
             //You're not clicking
             if(pickedObj != null) {
-                RaycastHit2D treeCheck = Physics2D.Raycast(curPos, Vector3.zero, Mathf.Infinity, 1 << 8);
+                RaycastHit2D treeCheck = Physics2D.Raycast(curPos, Vector3.zero, Mathf.Infinity, 1 << 8 | 1 << 7);
                 if(treeCheck) {
-                    pickedObj.transform.position = pickedPos;
+                    if(boughtItem > 0) { 
+                        stats.AddMoney(boughtItem);
+                        Destroy(pickedObj.gameObject);
+                    } else {
+                        pickedObj.transform.position = pickedPos;
+                    }
                 }
+                boughtItem = 0;
+                pickedObj.gameObject.layer = 7;
                 pickedObj.Drop();
                 pickedObj = null;
             } else if(clickedLastFrame && clickingOn != null && curClickTime < pickUpThreshold) {
@@ -98,9 +107,11 @@ public class CameraController : MonoBehaviour {
         return isClicking;
     }
 
-    public void SetPickedObject(Placeable placeable) {
+    public void SetPickedObject(Placeable placeable, float price) {
+        boughtItem = price;
         clickingOn = placeable.gameObject;
         pickedObj = placeable;
+        pickedObj.gameObject.layer = 6;
         curClickTime = pickUpThreshold;
         clickedLastFrame = true;
         isClicking = true;

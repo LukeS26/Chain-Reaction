@@ -37,7 +37,7 @@ public class StatManager : MonoBehaviour
         }
 
         popularity -= enviroHate * 0.1f * Time.deltaTime;
-        popularity += Mathf.Clamp(workers.GetAvgHappiness() - 0.5f, -0.5f, 0.25f) * Time.deltaTime * 0.1f;
+        popularity += Mathf.Clamp(workers.GetAvgHappiness() - 0.5f, -0.5f, 0.25f) * Time.deltaTime * 0.005f;
         popularity -= Mathf.Clamp(forestsDestroyed * 0.001f, 0, 1) * Time.deltaTime * 0.1f;;
 
         popularity = Mathf.Clamp01(popularity);
@@ -46,6 +46,14 @@ public class StatManager : MonoBehaviour
         GameManager.avgWorkHap = (int) (workers.GetAvgHappiness() * 100);
         GameManager.ceoHap = (int) (boardPopularity * 100);
         GameManager.custHap = (int) (popularity * 100);
+
+        if(popularity < 0.01f) {
+            FindObjectOfType<GameManager>().PopularityLose();
+        }
+
+        if(boardPopularity < 0.01f) {
+            FindObjectOfType<GameManager>().SharesLose();
+        }
     }
 
     public void UpdateBoard() {
@@ -60,8 +68,8 @@ public class StatManager : MonoBehaviour
     }
 
     public void DestoryTree() {
-        enviroHate += 0.04f;
-        popularity -= 0.04f;
+        enviroHate += 0.03f;
+        popularity -= 0.03f;
         forestsDestroyed++;
     }
 

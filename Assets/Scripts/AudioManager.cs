@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour {
     StatManager stats;
 
     public List<AudioClip> possibleBirds = new List<AudioClip>();
+    public List<AudioClip> musicLevels = new List<AudioClip>();
 
     // Start is called before the first frame update
     void Start() {
@@ -23,8 +24,14 @@ public class AudioManager : MonoBehaviour {
             stats = FindObjectOfType<StatManager>();
         }
 
-        intensity = stats.forestsDestroyed / 150f;
-        intensity = Mathf.Min(intensity, 1);
+        intensity = stats.forestsDestroyed / 80f;
+        intensity = Mathf.Clamp01(intensity);
+
+        if(!music.isPlaying) {
+            int state = (int) (intensity * musicLevels.Count);
+            music.clip = musicLevels[state];
+            music.Play();
+        }
 
         if(intensity < 0.9f) {
             timeTillNextBird -= Time.deltaTime;

@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4935352537397376697}
   - component: {fileID: 4935352537397376676}
   - component: {fileID: 4935352537397376677}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Residence Hall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fb7c4710b863744978a4cb47c8307b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  workersAssigned: 0
 --- !u!82 &4935352537397376677
 AudioSource:
   m_ObjectHideFlags: 0
@@ -170,9 +171,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 538e427c786b8564dbc6f15f08c450d9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5d5a56ce36d35e04fb8d476ffe6f3442, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

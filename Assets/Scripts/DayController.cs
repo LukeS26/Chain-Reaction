@@ -45,7 +45,7 @@ public class DayController : MonoBehaviour
             hourPercent %= 24;
 
             for(int i = 0; i < workers.workers.Count; i++) {
-                stats.PayMoney(workers.wage / 30f);
+                stats.PayMoney(workers.wage);
             }
             stats.UpdateBoard();
         }
