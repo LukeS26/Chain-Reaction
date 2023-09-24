@@ -15,6 +15,8 @@ public class Worker : MonoBehaviour {
     public WorkingStation workStation = null;
     public ResidenceStation residenceStation = null;
 
+    public bool WorkingStationIsSlaughter;
+
     float gridSize = 0.5f; //increase patience or gridSize for larger maps
     float speed = 0.2f; //increase for faster movement
     Pathfinder<Vector2> pathfinder; //the pathfinder object that stores the methods and patience
@@ -48,7 +50,7 @@ public class Worker : MonoBehaviour {
         if(isWorking) {
             float wageFactor = 550.0f / wage;
 
-            happiness -= happinessDecreaseRate * wageFactor * Time.deltaTime / 100f;
+            happiness -= (WorkingStationIsSlaughter ? 1.5f : 1f) * happinessDecreaseRate * wageFactor * Time.deltaTime / 100f;
             
             happiness = Mathf.Max(happiness, 0.0f);
         } else {
@@ -59,7 +61,7 @@ public class Worker : MonoBehaviour {
             happiness = Mathf.Min(happiness, 1.0f);
 
             if(happiness < 0.1f) {
-                if(Random.Range(0f, 1f) < Time.deltaTime * 0.2f * 12 / 0.2f) {
+                if(Random.Range(0f, 1f) < Time.deltaTime * 0.2f * 0.2f / 12f) {
                     workers.RemoveWorker(this);
                     workers.DropHappiness(0.2f, residenceStation);
 

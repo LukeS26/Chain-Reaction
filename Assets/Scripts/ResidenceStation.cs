@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ResidenceStation : Placeable {
-    int workersAssigned = 0;
+    public int workersAssigned = 0;
 
     public bool WorkersAllowed() {
         return workersAssigned < 10;
