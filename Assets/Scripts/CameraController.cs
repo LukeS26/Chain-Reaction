@@ -22,6 +22,8 @@ public class CameraController : MonoBehaviour {
 
     Placeable pickedObj;
 
+    StatManager stats;
+
     Camera ppc;
 
     // Update is called once per frame
@@ -30,16 +32,15 @@ public class CameraController : MonoBehaviour {
             ppc = GetComponent<Camera>();
         }
 
+        if (!stats) {
+            stats = FindObjectOfType<StatManager>();
+        }
+
         ppc.orthographicSize -= curZoom * zoomSpeed;
         ppc.orthographicSize = Mathf.Clamp(ppc.orthographicSize, 1, 4);
         
         if(isClicking) {
             RaycastHit2D hit = Physics2D.Raycast(curPos, Vector3.zero);
-
-            if(!clickedLastFrame && clickingOn) {
-                Placeable placeable = clickingOn.GetComponent<Placeable>();
-                if(placeable) { placeable.CloseMenu(); }
-            }
 
             //Get the first object clicked on when the mouse is pressed down
             if(!clickedLastFrame && hit) {
@@ -50,6 +51,11 @@ public class CameraController : MonoBehaviour {
             if(curClickTime > pickUpThreshold && clickingOn != null) {
                 if(hit && pickedObj == null && hit.transform.GetComponent<Placeable>()) {
                     pickedObj = hit.transform.GetComponent<Placeable>();
+                }
+                if(hit && pickedObj == null && hit.transform.GetComponent<Rainforest>()) {
+                    hit.transform.GetComponent<Rainforest>().DestroyEffect();
+                    stats.DestoryTree();
+                    Destroy(hit.transform.gameObject);
                 }
 
                 if(pickedObj) { pickedObj.Drag(curPos); }
@@ -71,10 +77,8 @@ public class CameraController : MonoBehaviour {
                 pickedObj.Drop();
                 pickedObj = null;
             } else if(clickedLastFrame && clickingOn != null && curClickTime < pickUpThreshold) {
-                //Open menu
                 Placeable placeable = clickingOn.GetComponent<Placeable>();
-                if(placeable) { placeable.OpenMenu(); }
-                // clickingOn = null;
+                if(placeable) { placeable.ClickOn(); }
             }
 
             curClickTime = 0;

@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResidenceStation : Placeable
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class ResidenceStation : Placeable {
+    int workersAssigned = 0;
+
+    public bool WorkersAllowed() {
+        return workersAssigned < 10;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void AssignWorker() {
+        workersAssigned++;
+    }
+
+    public void RemoveWorker() {
+        workersAssigned--;
     }
 }
