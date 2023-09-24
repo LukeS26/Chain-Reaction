@@ -27,7 +27,7 @@ public class NewsFlash : MonoBehaviour
     {
         width = GetComponent<RectTransform>().rect.width;
         pixsPerSec = width / textDuration;
-        AddText(textChoices[0]);
+        AddText(textChoices[Random.Range(0, textChoices.Length)]);
         happBought = false;
         greenBought = false;
     }
