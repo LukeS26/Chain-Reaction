@@ -60,7 +60,7 @@ public class WorkingStation : Placeable
             }
         }
 
-        curGrowthPercent += curWorkers * Time.deltaTime / (daysToGrow * 120);
+        curGrowthPercent += curWorkers * Time.deltaTime / (daysToGrow * 30);
         if(curGrowthPercent >= 1) {
             curGrowthPercent %= 1;
             statManager.AddMoney(moneyAmount);
@@ -82,7 +82,7 @@ public class WorkingStation : Placeable
     override public void ClickOn() {
         base.ClickOn();
 
-        curGrowthPercent += 3f / (daysToGrow * 120);
+        curGrowthPercent += 2f / (daysToGrow * 30);
         squashTime = Mathf.PI * 2 / speed;
     }
 
