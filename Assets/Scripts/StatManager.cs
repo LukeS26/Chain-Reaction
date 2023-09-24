@@ -38,10 +38,9 @@ public class StatManager : MonoBehaviour
 
         popularity -= enviroHate * 0.1f * Time.deltaTime;
         popularity += Mathf.Clamp(workers.GetAvgHappiness() - 0.5f, -0.5f, 0.25f) * Time.deltaTime * 0.1f;
-        popularity -= Mathf.Clamp(forestsDestroyed * 0.0001f, 0, 1);
+        popularity -= Mathf.Clamp(forestsDestroyed * 0.001f, 0, 1) * Time.deltaTime * 0.1f;;
 
-        popularity = Mathf.Min(popularity, 1);
-        popularity = Mathf.Max(0, popularity);
+        popularity = Mathf.Clamp01(popularity);
 
         GameManager.money = totalMoney;
         GameManager.avgWorkHap = (int) (workers.GetAvgHappiness() * 100);
@@ -50,8 +49,10 @@ public class StatManager : MonoBehaviour
     }
 
     public void UpdateBoard() {
-        boardPopularity += 0.1f * (totalDayMoney - ExpectedProfit()) / (totalDayMoney + ExpectedProfit());
+        boardPopularity += 0.3f * (totalDayMoney - ExpectedProfit()) / (totalDayMoney + ExpectedProfit());
         totalDayMoney = 0;
+
+        boardPopularity = Mathf.Clamp01(boardPopularity);
     }
     
     float ExpectedProfit() {
@@ -59,8 +60,8 @@ public class StatManager : MonoBehaviour
     }
 
     public void DestoryTree() {
-        enviroHate += 0.02f;
-        popularity -= 0.02f;
+        enviroHate += 0.04f;
+        popularity -= 0.04f;
         forestsDestroyed++;
     }
 
@@ -86,5 +87,9 @@ public class StatManager : MonoBehaviour
     public void PayMoney(float amount) {
         totalMoney -= amount;
         totalDayMoney -= amount;
+    }
+
+    public void BuyItem(float amount) {
+        totalMoney -= amount;
     }
 }

@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
             if(timeCycle > 1.0f) { timeCycle = 0.0f; }
 
             // Spins the dayNightWheel
-            dayNightWheel.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -timeCycle * 360);
+            dayNightWheel.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180-(timeCycle * 360));
 
             UpdateHappinessLevels();
         }

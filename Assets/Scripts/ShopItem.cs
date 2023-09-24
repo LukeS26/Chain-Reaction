@@ -10,6 +10,7 @@ public class ShopItem : MonoBehaviour, IDragHandler
     public GameObject prefab;
 
     CameraController controller;
+    StatManager stats;
 
     bool dragging;
 
@@ -28,11 +29,21 @@ public class ShopItem : MonoBehaviour, IDragHandler
             controller = FindObjectOfType<CameraController>();
         }
 
+        if(!stats) {
+            stats = FindObjectOfType<StatManager>();
+        }
+
         if(dragging) {
             return;
         }
 
         dragging = true;
+
+        if(stats.totalMoney < price) {
+            return;
+        }  
+
+        stats.BuyItem(price);
 
         if(prefab) {
             if(prefab.GetComponent<Placeable>()) {

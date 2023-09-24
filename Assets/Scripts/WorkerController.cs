@@ -10,7 +10,8 @@ public class WorkerController : MonoBehaviour
 
     float timeWorking;
     public int wage = 0;
-    public TextMeshProUGUI wageIn;
+    
+    public TMP_InputField wageIn;
     float startWorkTime = 5; //Sunrise = 6
     float endWorkTime = 17; //Sunset = 18
 
@@ -38,8 +39,6 @@ public class WorkerController : MonoBehaviour
             stats.UnionEvent();
             minimumWage = 575;
         }
-
-        wage = int.Parse((string) wageIn.GetComponent<TextMeshProUGUI>().text);
         
         if(wage < minimumWage) {
             wage = minimumWage;
@@ -68,6 +67,16 @@ public class WorkerController : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void SetWage(string input) {
+        wage = int.Parse(wageIn.text);
+
+        if(wage < minimumWage) {
+            wage = minimumWage;
+        }
+
+        UpdateWages(wage);
     }
 
     public void DropHappiness(float amount, ResidenceStation residence) {
