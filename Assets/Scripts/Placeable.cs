@@ -28,7 +28,7 @@ public class Placeable : MonoBehaviour {
         // transform.position = (transform.position * 0.9f) + (target * 0.1f);
     }
 
-    public void Drop() {
+    virtual public void Drop() {
         hoverTimer = 0;
 
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
@@ -37,13 +37,9 @@ public class Placeable : MonoBehaviour {
         transform.position = Snap(transform.position, 0);
     }
 
-    public void OpenMenu() {
-        transform.GetChild(0).gameObject.SetActive(true);
-    }
-
-    public void CloseMenu() {
-        transform.GetChild(0).gameObject.SetActive(false);
-    }
+    virtual public void ClickOn() {
+        GetComponent<AudioSource>().Play();
+     }
 
     Vector3 Snap(Vector3 localPosition, float z) {
         // Calculate ratios for simple grid snap
