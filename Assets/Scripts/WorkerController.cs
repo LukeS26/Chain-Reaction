@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WorkerController : MonoBehaviour
 {
     public List<Worker> workers = new List<Worker>();
 
     float timeWorking;
-    public float wage;
+    public int wage = 0;
+    public TextMeshProUGUI wageIn;
     float startWorkTime = 5; //Sunrise = 6
     float endWorkTime = 17; //Sunset = 18
 
@@ -16,7 +19,7 @@ public class WorkerController : MonoBehaviour
     DayController dayCycle;
     StatManager stats;
 
-    float minimumWage = 300;
+    int minimumWage = 300;
 
     // Update is called once per frame
     void Update() {
@@ -30,12 +33,14 @@ public class WorkerController : MonoBehaviour
 
         isWorkingDay = dayCycle.GetHour() > startWorkTime && dayCycle.GetHour() < endWorkTime;
 
-        if(!isWorkingDay && GetAvgHappiness() < 0.3f && Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.4f / 12f) {
+        if(!isWorkingDay && GetAvgHappiness() < 0.3f && UnityEngine.Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.4f / 12f) {
             //Unionize
             stats.UnionEvent();
             minimumWage = 575;
         }
 
+        wage = int.Parse((string) wageIn.GetComponent<TextMeshProUGUI>().text);
+        
         if(wage < minimumWage) {
             wage = minimumWage;
             UpdateWages(wage);
@@ -74,7 +79,7 @@ public class WorkerController : MonoBehaviour
         }
     }
 
-    public void UpdateWages(float new_wage) {
+    public void UpdateWages(int new_wage) {
         wage = new_wage;
 
         for(int i = 0; i < workers.Count; i++) {
