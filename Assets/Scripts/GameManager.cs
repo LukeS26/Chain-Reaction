@@ -16,12 +16,15 @@ public class GameManager : MonoBehaviour
     // Sprite Variables
 
     // TextMeshProUGUI Variables
+    public TextMeshProUGUI moneyText, avgWorkHapText;
+    public TextMeshProUGUI ceoHapText, custHapText;
 
     // Boolean Variables
     public static bool gameStarted;
 
     // Float Variables
     public static float timeCycle;
+    public static float money, avgWorkHap, ceoHap, custHap;
 
     // Integer Variables
 
@@ -57,6 +60,8 @@ public class GameManager : MonoBehaviour
 
             // Spins the dayNightWheel
             dayNightWheel.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -timeCycle * 360);
+
+            UpdateHappinessLevels();
         }
     }
 
@@ -88,8 +93,24 @@ public class GameManager : MonoBehaviour
     }
 
     // Toggles whether the shop menu is visible
-    public void toggleShop()
+    public void ToggleShop()
     {
         shop.SetActive(!shop.activeSelf);
+    }
+
+    // Updates the happiness level for several components, and how much money the player has
+    void UpdateHappinessLevels()
+    {
+        // Updates values contained within variables
+        money = 0.0f;
+        avgWorkHap = 0.0f;
+        ceoHap = 0.0f;
+        custHap = 0.0f;
+
+        // Updates text in UI
+        moneyText.text = "Money: $" + money;
+        avgWorkHapText.text = "Average Worker Happiness: " + avgWorkHap;
+        ceoHapText.text = "CEO Happiness: " + ceoHap;
+        custHapText.text = "Customer Happiness: " + custHap;
     }
 }
