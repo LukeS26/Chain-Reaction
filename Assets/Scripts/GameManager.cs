@@ -105,13 +105,13 @@ public class GameManager : MonoBehaviour
     public void SharesLose()
     {
         inGameUI.SetActive(false);
-        shareLoseMenu.SetActive(false);
+        shareLoseMenu.SetActive(true);
     }
 
     // Opens Lose by Popularity Lose Screen
     public void PopularityLose()
     {
         inGameUI.SetActive(false);
-        popLoseMenu.SetActive(false);
+        popLoseMenu.SetActive(true);
     }
 }

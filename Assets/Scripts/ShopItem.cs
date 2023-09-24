@@ -43,11 +43,11 @@ public class ShopItem : MonoBehaviour, IDragHandler
             return;
         }  
 
-        stats.BuyItem(price);
+        stats.PayMoney(price);
 
         if(prefab) {
             if(prefab.GetComponent<Placeable>()) {
-                controller.SetPickedObject(Instantiate(prefab).GetComponent<Placeable>());
+                controller.SetPickedObject(Instantiate(prefab).GetComponent<Placeable>(), price);
             }
         }
     }

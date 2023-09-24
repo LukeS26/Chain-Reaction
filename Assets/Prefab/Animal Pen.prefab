@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 1699510524731107803}
   - component: {fileID: 1699510524731107780}
   - component: {fileID: 1699510524731107800}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animal Pen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
