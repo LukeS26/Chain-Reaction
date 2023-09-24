@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     // GameObject Variables
-    public GameObject startMenu, inGameUI, pauseMenu;
+    public GameObject startMenu, inGameUI, pauseMenu, shareLoseMenu, popLoseMenu;
     public GameObject dayNightWheel;
     public GameObject shop;
 
@@ -65,19 +65,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Starts End Game Sequence
-    void EndGame() 
-    {
-        gameStarted = false;
-        /* StartCoroutine(OpenEndGameMenu()); */
-    }
-
-    // Opens End Game Menu
-    /* IEnumerator OpenEndGameMenu()
-    {
-        
-    } */
-
     // Called when the Pause Menu is opened
     public void OpenPause()
     {
@@ -106,5 +93,25 @@ public class GameManager : MonoBehaviour
         avgWorkHapText.text = "Average Worker Happiness: " + avgWorkHap;
         ceoHapText.text = "Shareholder Happiness: " + ceoHap;
         custHapText.text = "Customer Happiness: " + custHap;
+    }
+
+    // Resets the game
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    // Opens Lose by Shares Lose Screen
+    public void SharesLose()
+    {
+        inGameUI.SetActive(false);
+        shareLoseMenu.SetActive(false);
+    }
+
+    // Opens Lose by Popularity Lose Screen
+    public void PopularityLose()
+    {
+        inGameUI.SetActive(false);
+        popLoseMenu.SetActive(false);
     }
 }
