@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     // GameObject Variables
     public GameObject startMenu, inGameUI, pauseMenu;
     public GameObject dayNightWheel;
+    public GameObject shop;
 
     // Sprite Variables
 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         startMenu.SetActive(false);
         inGameUI.SetActive(true);
+        shop.SetActive(false);
         gameStarted = true;
     }
 
@@ -83,5 +85,11 @@ public class GameManager : MonoBehaviour
     {
         inGameUI.SetActive(true);
         pauseMenu.SetActive(false);
+    }
+
+    // Toggles whether the shop menu is visible
+    public void toggleShop()
+    {
+        shop.SetActive(!shop.activeSelf);
     }
 }
