@@ -4230,7 +4230,69 @@ MonoBehaviour:
   newsFlashTextPrefab: {fileID: 1852834226665563108, guid: a9a94e963a549fe4996faecc0ec42384, type: 3}
   textDuration: 3
   textChoices:
-  - Test
+  - Child labor in palm oil industry tied to Girl Scout cookies
+  - Lawyers who sued Tesla board for excess pay want $10,000 an hour
+  - People Accuse Robinhood Of Stealing From The Poor To Give To The Rich
+  - US troops accidentally raid sunflower oil factory
+  - Dubai is coping with its 125-degree heat by using laser-beam-shooting drones
+    to shock rainwater out of clouds
+  - Couple livid after sitting next to farting dog on 13-hour flight
+  - DoorDash Spent $5.5 Million To Advertise Their $1 Million Charity Donation
+  - Prisoners ask to extend sentence due to housing crisis
+  - "NSA Orders Employees to Spy \u201CWith Dignity and Respect\u201D"
+  - Chicago TV news crew robbed at gunpoint while reporting on a string of robberies
+  - CDC warns not to 'kiss or cuddle your turtle'
+  - GameStop Is Having A TikTok Competition For Its Employees And One Of The Prizes
+    Is 10 Extra Labor Hours
+  - "Mark Zuckerberg Says Meta Employees \u201CLovingly\u201D Refer to Him as \u201CThe
+    Eye of Sauron\u201D"
+  - Elon Musk threatens to sue Anti-Defamation League for Defamation
+  - "Reddit CEO tells user, \u201Cwe are not the thought police,\u201D then suspends
+    that user"
+  - "Plane Flies Over Robinhood HQ with \u2018Suck My Nuts\u2019 Banner"
+  - NYC tourists seeking authentic experience take late-night rat tours
+  - Soccer for peace event canceled, two groups clash on field
+  - Visitors to sunflower fields urged to stop posing naked for photo shoots
+  happinessBoostText:
+  - One lucky employee is being flown out to Hollywood to see our new film!
+  - Free palm oil samples for everyone!
+  - All workers are invited to our one hour musical about the beauty of employee
+    unity
+  - Workers recieve surprise visit from Palmy the Oil Palm
+  - All employees recieve fun-size candy
+  - Lunch breaks now one minute longer
+  greenwashingText:
+  - Our bottle caps are now 70% sustainable
+  - One tree is planted for every acre removed
+  - We now capture and process 30% of our cow farts!
+  - "We bought enough carbon offsets to cover our CEO\u2019s private jet"
+  - We donated 1 million dollars to #TeamSeas
+  - We began burning workers' bodies for fuel as a renewable resource
+  - We pledged to begin reducing carbon emissions by 2099
+  - We airdropped 1 ton of ice into the arctic
+  - "We awarded ourselves with the \u201CMost Climate Friendly Company\u201D award"
+  positiveText:
+  - "We\u2019re invited to a global climate conference"
+  - We won the Nobel Peace prize
+  - The government reduces our taxes to negative 5%
+  - Palm oil becomes the most used lubricant
+  - Local Governor decreases agricultural regulation
+  - The Shareholders are happy
+  - Mr Beast gifts unknown child 1,000,000 Gallons of Palm oil
+  - New research indicates we may violate thermodynamics, and be the first company
+    with unlimited growth
+  - "\u201CI Love Palm Oil\u201D shirts become the #1 clothing item worldwide"
+  - Palm oil found to be new opioid replacement
+  negativeText:
+  - 'One of our employees has retired to heaven: A memorial service will be held
+    over lunch'
+  - The Government Shutdown has cut off our food travel subsidies
+  - The EPA has kindly asked us to stop defeathering parrots
+  - The FDA has kindly asked us to stop feeding our employees cow brains
+  - Due to new treaties, we can no longer dump our trash into Narnia
+  - Due to new regulations, we can no longer add chicken pox to our palm oil
+  happBought: 0
+  greenBought: 0
 --- !u!1 &1444153697
 GameObject:
   m_ObjectHideFlags: 0
