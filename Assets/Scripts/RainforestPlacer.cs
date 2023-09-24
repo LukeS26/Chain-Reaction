@@ -7,7 +7,7 @@ public class RainforestPlacer : MonoBehaviour {
 
     public static bool isLoading = true;
 
-    int size = 256;
+    int size = 128;
 
     float x, y;
     int i;

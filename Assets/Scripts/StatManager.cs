@@ -35,7 +35,7 @@ public class StatManager : MonoBehaviour
         }
 
         popularity -= enviroHate * 0.1f * Time.deltaTime;
-        popularity += workers.GetAvgHappiness() - 0.5f * Time.deltaTime * 0.1f;
+        popularity += (workers.GetAvgHappiness() - 0.5f) * Time.deltaTime * 0.1f;
 
         boardPopularity += 0;
     }

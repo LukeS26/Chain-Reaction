@@ -30,7 +30,7 @@ public class WorkerController : MonoBehaviour
 
         isWorkingDay = dayCycle.GetHour() > startWorkTime && dayCycle.GetHour() < endWorkTime;
 
-        if(!isWorkingDay && GetAvgHappiness() < 0.3f && Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 12 / 0.2f) {
+        if(!isWorkingDay && GetAvgHappiness() < 0.3f && Random.Range(0f, 1f) < 0.4f * Time.deltaTime * 0.2f / 12f) {
             //Unionize
             stats.UnionEvent();
             minimumWage = 450;
@@ -56,6 +56,12 @@ public class WorkerController : MonoBehaviour
     public void RemoveWorker(Worker worker) {
         for(int i = 0; i < workers.Count; i++) {
             if(worker == workers[i]) {
+                if(worker.residenceStation) {
+                    worker.residenceStation.RemoveWorker();
+                }
+                if(worker.workStation) {
+                    worker.workStation.RemoveWorker(worker);
+                }
                 workers.RemoveAt(i);
                 return;
             }
@@ -96,6 +102,25 @@ public class WorkerController : MonoBehaviour
         }
     }
 
+    public void PutInResidence(Worker worker) {
+        ResidenceStation[] residenceStations = FindObjectsByType<ResidenceStation>(FindObjectsSortMode.None);
+
+        if(residenceStations.Length < 0) {
+            return;
+        }
+
+        for(int j = 0; j < residenceStations.Length; j++) {
+            if(residenceStations[j].WorkersAllowed()) {
+                worker.isWorking = false;
+                worker.residenceStation = residenceStations[j];
+                residenceStations[j].AssignWorker();
+                worker.transform.SetParent(residenceStations[j].transform.Find("workers"));
+                worker.transform.localPosition = Vector3.zero;
+                break;
+            }
+        }
+    }
+
     public void UpdateWorkers(bool doWork) {
         if(doWork) {
             WorkingStation[] workStations = FindObjectsByType<WorkingStation>(FindObjectsSortMode.None);
@@ -130,6 +155,7 @@ public class WorkerController : MonoBehaviour
                     }
                     worker.isWorking = true;
                     worker.workStation = workStations[closestWork];
+                    worker.WorkingStationIsSlaughter = workStations[closestWork].gameObject.GetComponent<Animalpen>() != null;
                     workStations[closestWork].AssignWorker(worker);
                     worker.GetMoveCommand((Vector2) workStations[closestWork].transform.position);
                 }

@@ -40,6 +40,8 @@ public class DayController : MonoBehaviour
             hourPercent %= 24;
         }
 
+        GameManager.timeCycle = GetDayPercent();
+
         if(daysPassed >= daysInQuarter) {
             daysPassed = 0;
             curQuarter++;

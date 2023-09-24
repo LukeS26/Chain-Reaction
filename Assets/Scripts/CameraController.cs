@@ -26,6 +26,8 @@ public class CameraController : MonoBehaviour {
 
     Camera ppc;
 
+    Vector3 pickedPos;
+
     // Update is called once per frame
     void Update() {
         if (!ppc) {
@@ -48,9 +50,10 @@ public class CameraController : MonoBehaviour {
             }
 
             //if clicking on an object for long enough, drag it
-            if(curClickTime > pickUpThreshold && clickingOn != null) {
+            if(curClickTime >= pickUpThreshold && clickingOn != null) {
                 if(hit && pickedObj == null && hit.transform.GetComponent<Placeable>()) {
                     pickedObj = hit.transform.GetComponent<Placeable>();
+                    pickedPos = pickedObj.transform.position;
                 }
                 if(hit && pickedObj == null && hit.transform.GetComponent<Rainforest>()) {
                     hit.transform.GetComponent<Rainforest>().DestroyEffect();
@@ -74,6 +77,10 @@ public class CameraController : MonoBehaviour {
         } else {
             //You're not clicking
             if(pickedObj != null) {
+                RaycastHit2D treeCheck = Physics2D.Raycast(curPos, Vector3.zero, Mathf.Infinity, 1 << 8);
+                if(treeCheck) {
+                    pickedObj.transform.position = pickedPos;
+                }
                 pickedObj.Drop();
                 pickedObj = null;
             } else if(clickedLastFrame && clickingOn != null && curClickTime < pickUpThreshold) {
@@ -85,6 +92,18 @@ public class CameraController : MonoBehaviour {
         }
 
         clickedLastFrame = isClicking;
+    }
+
+    public bool IsClicking() {
+        return isClicking;
+    }
+
+    public void SetPickedObject(Placeable placeable) {
+        clickingOn = placeable.gameObject;
+        pickedObj = placeable;
+        curClickTime = pickUpThreshold;
+        clickedLastFrame = true;
+        isClicking = true;
     }
 
     public void DragAction(InputAction.CallbackContext obj) {

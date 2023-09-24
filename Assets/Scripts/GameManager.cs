@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
             if(timeCycle > 1.0f) { timeCycle = 0.0f; }
 
             // Spins the dayNightWheel
-            dayNightWheel.transform.Rotate(0.0f, 0.0f, (timeCycle * 360), Space.World);
+            dayNightWheel.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -timeCycle * 360);
         }
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 993902349963655107}
   - component: {fileID: 993902349963655104}
   - component: {fileID: -8328975084829491315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rainforest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d3619a94a2fe35944a588f837176e6d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!60 &993902349963655104
 PolygonCollider2D:
   m_ObjectHideFlags: 0
