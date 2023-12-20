@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     // GameObject Variables
-    public GameObject startMenu, inGameUI, pauseMenu, shareLoseMenu, popLoseMenu;
+    public GameObject startMenu, inGameUI, pauseMenu, shareLoseMenu, popLoseMenu, legalMenu;
     public GameObject dayNightWheel;
     public GameObject shop;
 
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI ceoHapText, custHapText;
 
     // Boolean Variables
-    public static bool gameStarted;
+    public static bool gameStarted, gamePaused;
 
     // Float Variables
     public static float timeCycle;
@@ -32,12 +32,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameStarted = false;
+        gamePaused = false;
         timeCycle = 0.0f;
         
         // Sets the Start Menu active, and every other Menu inactive
         startMenu.SetActive(true);
         inGameUI.SetActive(false);
         pauseMenu.SetActive(false);
+        shareLoseMenu.SetActive(false);
+        popLoseMenu.SetActive(false);
+        legalMenu.SetActive(false);
     }
 
     // Called when the game is started
@@ -70,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         inGameUI.SetActive(false);
         pauseMenu.SetActive(true);
+        gamePaused = true;
     }
 
     // Called when the Pause Menu is closed
@@ -77,6 +82,21 @@ public class GameManager : MonoBehaviour
     {
         inGameUI.SetActive(true);
         pauseMenu.SetActive(false);
+        gamePaused = false;
+    }
+
+    // Called when the Legal Menu is opened
+    public void OpenLegal()
+    {
+        legalMenu.SetActive(true);
+        startMenu.SetActive(false);
+    }
+
+    // Called when the Legal Menu is closed
+    public void CloseLegal()
+    {
+        legalMenu.SetActive(false);
+        startMenu.SetActive(true);
     }
 
     // Toggles whether the shop menu is visible
@@ -104,14 +124,22 @@ public class GameManager : MonoBehaviour
     // Opens Lose by Shares Lose Screen
     public void SharesLose()
     {
-        inGameUI.SetActive(false);
-        shareLoseMenu.SetActive(true);
+        // Makes sure only one lose menu is open at a time
+        if(!popLoseMenu.activeSelf)
+        {
+            inGameUI.SetActive(false);
+            shareLoseMenu.SetActive(true);
+        }
     }
 
     // Opens Lose by Popularity Lose Screen
     public void PopularityLose()
     {
-        inGameUI.SetActive(false);
-        popLoseMenu.SetActive(true);
+        // Makes sure only one lose menu is open at a time
+        if(!shareLoseMenu.activeSelf)
+        {
+            inGameUI.SetActive(false);
+            popLoseMenu.SetActive(true);
+        }
     }
 }

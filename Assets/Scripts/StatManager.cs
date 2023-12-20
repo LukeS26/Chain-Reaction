@@ -26,7 +26,7 @@ public class StatManager : MonoBehaviour
             days = FindObjectOfType<DayController>();
         }
 
-        enviroHate -= Time.deltaTime * enviroHateDecayRate;
+        if(!GameManager.gamePaused) { enviroHate -= Time.deltaTime * enviroHateDecayRate; }
 
         if(enviroHate > 1) {
             enviroHate = 1;
@@ -36,11 +36,13 @@ public class StatManager : MonoBehaviour
             enviroHate = 0;
         }
 
-        popularity -= enviroHate * 0.1f * Time.deltaTime;
-        popularity += Mathf.Clamp(workers.GetAvgHappiness() - 0.5f, -0.5f, 0.25f) * Time.deltaTime * 0.005f;
-        popularity -= Mathf.Clamp(forestsDestroyed * 0.001f, 0, 1) * Time.deltaTime * 0.1f;;
+        if(!GameManager.gamePaused){
+            popularity -= enviroHate * 0.1f * Time.deltaTime;
+            popularity += Mathf.Clamp(workers.GetAvgHappiness() - 0.5f, -0.5f, 0.25f) * Time.deltaTime * 0.005f;
+            popularity -= Mathf.Clamp(forestsDestroyed * 0.001f, 0, 1) * Time.deltaTime * 0.1f;;
 
-        popularity = Mathf.Clamp01(popularity);
+            popularity = Mathf.Clamp01(popularity);
+        }
 
         GameManager.money = totalMoney;
         GameManager.avgWorkHap = (int) (workers.GetAvgHappiness() * 100);

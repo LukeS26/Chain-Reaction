@@ -20,6 +20,15 @@ public class DayController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if(GameManager.gamePaused){
+            daySpeed = 0.0f;
+            nightSpeed = 0.0f;
+        }
+        else{
+            daySpeed = 0.1f;
+            nightSpeed = 0.2f;
+        }
+
         if(!workers) {
             workers = GetComponent<WorkerController>();
         }
