@@ -13,8 +13,6 @@ public class GameManager : MonoBehaviour
     public GameObject dayNightWheel;
     public GameObject shop;
 
-    // Sprite Variables
-
     // TextMeshProUGUI Variables
     public TextMeshProUGUI moneyText, avgWorkHapText;
     public TextMeshProUGUI ceoHapText, custHapText;
@@ -25,8 +23,6 @@ public class GameManager : MonoBehaviour
     // Float Variables
     public static float timeCycle;
     public static float money, avgWorkHap, ceoHap, custHap;
-
-    // Integer Variables
 
     // Start is called before the first frame update
     void Start()
