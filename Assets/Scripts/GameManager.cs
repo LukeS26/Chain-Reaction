@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     // TextMeshProUGUI Variables
     public TextMeshProUGUI moneyText, avgWorkHapText;
     public TextMeshProUGUI ceoHapText, custHapText;
+    public TextMeshProUGUI numWorkersText;
 
     // Boolean Variables
     public static bool gameStarted, gamePaused;
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
     // Float Variables
     public static float timeCycle;
     public static float money, avgWorkHap, ceoHap, custHap;
+
+    // Integer Variables
+    public static int numWorkers;
 
     // Start is called before the first frame update
     void Start()
@@ -109,6 +113,7 @@ public class GameManager : MonoBehaviour
         avgWorkHapText.text = "Average Worker Happiness: " + avgWorkHap;
         ceoHapText.text = "Shareholder Happiness: " + ceoHap;
         custHapText.text = "Customer Happiness: " + custHap;
+        numWorkersText.text = "Workers Employed: " + numWorkers;
     }
 
     // Resets the game

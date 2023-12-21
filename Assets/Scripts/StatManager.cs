@@ -48,6 +48,7 @@ public class StatManager : MonoBehaviour
         GameManager.avgWorkHap = (int) (workers.GetAvgHappiness() * 100);
         GameManager.ceoHap = (int) (boardPopularity * 100);
         GameManager.custHap = (int) (popularity * 100);
+        GameManager.numWorkers = workers.workers.Count;
 
         if(popularity < 0.01f) {
             FindObjectOfType<GameManager>().PopularityLose();
